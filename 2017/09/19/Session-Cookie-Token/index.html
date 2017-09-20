@@ -14,12 +14,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/19/Session-Cookie-Token/index.html">
 <meta property="og:site_name" content="lionsyu's blog">
 <meta property="og:description" content="博客又被扔在一旁小半年了，干脆立个flag好了，11月之前一周一更？把之前学习的内容做个总结归纳。">
-<meta property="og:image" content="http://lionsyu.github.io/image/blog001.jpg">
-<meta property="og:updated_time" content="2017-09-20T08:57:46.000Z">
+<meta property="og:image" content="https://lionsyu.github.io/image/blog001.jpg">
+<meta property="og:updated_time" content="2017-09-20T09:04:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cookie Session Token">
 <meta name="twitter:description" content="博客又被扔在一旁小半年了，干脆立个flag好了，11月之前一周一更？把之前学习的内容做个总结归纳。">
-<meta name="twitter:image" content="http://lionsyu.github.io/image/blog001.jpg">
+<meta name="twitter:image" content="https://lionsyu.github.io/image/blog001.jpg">
   
     <link rel="alternative" href="/atom.xml" title="lionsyu&#39;s blog" type="application/atom+xml">
   
@@ -166,7 +166,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>博客又被扔在一旁小半年了，干脆立个flag好了，11月之前一周一更？把之前学习的内容做个总结归纳。</p>
-<p><img src="http://lionsyu.github.io/image/blog001.jpg" alt=""></p>
+<p><img src="https://lionsyu.github.io/image/blog001.jpg" alt=""></p>
 <a id="more"></a>
 <h1 id="Cookie-Session-Token"><a href="#Cookie-Session-Token" class="headerlink" title="Cookie Session Token"></a>Cookie Session Token</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>众所周知，目前客户端与服务端之间的交互基本都是基于Http和Https，它们本身是无状态的，只负责对应的请求和相应，那么当一个请求从客户端发送到服务端的时候，服务端无法知道是谁发出的请求，也就不知道把什么资源返回到客户端，这时我们就需要用到以上信息来记录用户的状态。</p>
 <h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie实际上是一小段的文本信息，当客户端首次发起请求时，服务端会生成一个Cookie并返回给客户端，Cookie存储在客户端，在下次请求发起时，请求内容连同Cookie一起提交给服务端，服务端通过该Cookie来判别该用户信息。</p>
