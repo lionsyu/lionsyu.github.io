@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/9 | lionsyu&#39;s blog</title>
+  <title>RESTful API 基础知识 | lionsyu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="lionsyu's blog">
-<meta property="og:url" content="http://yoursite.com/archives/2017/09/index.html">
+  <meta name="description" content="1年的事情也陆陆续续忙完了，今天难得空闲，随便整理些最近的笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RESTful API 基础知识">
+<meta property="og:url" content="http://yoursite.com/2018/02/01/RESTful/index.html">
 <meta property="og:site_name" content="lionsyu's blog">
+<meta property="og:description" content="1年的事情也陆陆续续忙完了，今天难得空闲，随便整理些最近的笔记">
+<meta property="og:image" content="http://yoursite.com/image/blog001.jpg">
+<meta property="og:updated_time" content="2018-02-01T06:29:41.155Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lionsyu's blog">
+<meta name="twitter:title" content="RESTful API 基础知识">
+<meta name="twitter:description" content="1年的事情也陆陆续续忙完了，今天难得空闲，随便整理些最近的笔记">
+<meta name="twitter:image" content="http://yoursite.com/image/blog001.jpg">
   
     <link rel="alternative" href="/atom.xml" title="lionsyu&#39;s blog" type="application/atom+xml">
   
@@ -135,36 +141,71 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-RESTful" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/19/Session-Cookie-Token/" class="archive-article-date">
-  	<time datetime="2017-09-19T06:44:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/19/Session-Cookie-Token/">Cookie Session Token</a>
+    <h1 class="article-title" itemprop="name">
+      RESTful API 基础知识
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/02/01/RESTful/" class="archive-article-date">
+  	<time datetime="2018-02-01T06:44:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1年的事情也陆陆续续忙完了，今天难得空闲，随便整理些最近的笔记</p>
+<p><img src="image/blog001.jpg" alt=""></p>
+<a id="more"></a>
+<h1 id="RESTful-API-基础知识"><a href="#RESTful-API-基础知识" class="headerlink" title="RESTful API 基础知识"></a>RESTful API 基础知识</h1><h3 id="常用Http动词"><a href="#常用Http动词" class="headerlink" title="常用Http动词"></a>常用Http动词</h3><p>GET (选择)：从服务器上获取一个具体的资源或者一个资源列表。<br>POST （创建）： 在服务器上创建一个新的资源。<br>PUT （更新）：以整体的方式更新服务器上的一个资源。<br>PATCH （更新）：只更新服务器上一个资源的一个属性。<br>DELETE （删除）：删除服务器上的一个资源。</p>
+<h3 id="服务端返回状态码"><a href="#服务端返回状态码" class="headerlink" title="服务端返回状态码"></a>服务端返回状态码</h3><p>1xx范围的状态码是保留给底层HTTP功能使用的，并且估计在你的职业生涯里面也用不着手动发送这样一个状态码出来。</p>
+<p>2xx范围的状态码是保留给成功消息使用的，你尽可能的确保服务器总发送这些状态码给用户。</p>
+<p>3xx范围的状态码是保留给重定向用的。大多数的API不会太常使用这类状态码，但是在新的超媒体样式的API中会使用更多一些。</p>
+<p>4xx范围的状态码是保留给客户端错误用的。例如，客户端提供了一些错误的数据或请求了不存在的内容。这些请求应该是幂等的，不会改变任何服务器的状态。</p>
+<p>5xx范围的状态码是保留给服务器端错误用的。这些错误常常是从底层的函数抛出来的，并且开发人员也通常没法处理。发送这类状态码的目的是确保客户端能得到一些响应。收到5xx响应后，客户端没办法知道服务器端的状态，所以这类状态码是要尽可能的避免。</p>
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><h5 id="url使用名词而不是动词-且使用复数名词"><a href="#url使用名词而不是动词-且使用复数名词" class="headerlink" title="url使用名词而不是动词,且使用复数名词"></a>url使用名词而不是动词,且使用复数名词</h5><h5 id="Get方法和查询参数不应该涉及状态改变"><a href="#Get方法和查询参数不应该涉及状态改变" class="headerlink" title="Get方法和查询参数不应该涉及状态改变"></a>Get方法和查询参数不应该涉及状态改变</h5><h5 id="使用Http状态码处理错误"><a href="#使用Http状态码处理错误" class="headerlink" title="使用Http状态码处理错误"></a>使用Http状态码处理错误</h5><h5 id="版本化你的API"><a href="#版本化你的API" class="headerlink" title="版本化你的API"></a>版本化你的API</h5><h5 id="为集合提供过滤-排序-选择和分页等功能"><a href="#为集合提供过滤-排序-选择和分页等功能" class="headerlink" title="为集合提供过滤 排序 选择和分页等功能"></a>为集合提供过滤 排序 选择和分页等功能</h5><p>过滤 GET /cars?color=red 返回红色的cars<br>排序 GET /cars?sort=-manufactorer,+model<br>选择 GET /cars?fields=manufacturer,model,id,color<br>分页 GET /cars?offset=10&amp;limit=5</p>
+<h5 id="使用子资源表达关系"><a href="#使用子资源表达关系" class="headerlink" title="使用子资源表达关系"></a>使用子资源表达关系</h5><p>GET /cars/711/drivers/ 返回 car 711的所有司机<br>GET /cars/711/drivers/4 返回 car 711的4号司机</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢老板，么么哒<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/blogPay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -176,19 +217,88 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/02/01/RESTful/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/05/26/浅谈git/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">GIT</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -211,8 +321,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

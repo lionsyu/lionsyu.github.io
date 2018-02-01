@@ -6,20 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Cookie Session Token | lionsyu&#39;s blog</title>
+  <title>Archives: 2018 | lionsyu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="博客又被扔在一旁小半年了，干脆立个flag好了，11月之前一周一更？把之前学习的内容做个总结归纳。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Cookie Session Token">
-<meta property="og:url" content="http://yoursite.com/2017/09/19/Session-Cookie-Token/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="lionsyu's blog">
+<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
 <meta property="og:site_name" content="lionsyu's blog">
-<meta property="og:description" content="博客又被扔在一旁小半年了，干脆立个flag好了，11月之前一周一更？把之前学习的内容做个总结归纳。">
-<meta property="og:image" content="https://lionsyu.github.io/image/blog001.jpg">
-<meta property="og:updated_time" content="2017-09-20T09:04:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cookie Session Token">
-<meta name="twitter:description" content="博客又被扔在一旁小半年了，干脆立个flag好了，11月之前一周一更？把之前学习的内容做个总结归纳。">
-<meta name="twitter:image" content="https://lionsyu.github.io/image/blog001.jpg">
+<meta name="twitter:title" content="lionsyu's blog">
   
     <link rel="alternative" href="/atom.xml" title="lionsyu&#39;s blog" type="application/atom+xml">
   
@@ -141,68 +135,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Session-Cookie-Token" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Cookie Session Token
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/02/01/RESTful/" class="archive-article-date">
+  	<time datetime="2018-02-01T06:44:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-01</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/02/01/RESTful/">RESTful API 基础知识</a>
     </h1>
   
 
-        
-        <a href="/2017/09/19/Session-Cookie-Token/" class="archive-article-date">
-  	<time datetime="2017-09-19T06:44:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>博客又被扔在一旁小半年了，干脆立个flag好了，11月之前一周一更？把之前学习的内容做个总结归纳。</p>
-<p><img src="https://lionsyu.github.io/image/blog001.jpg" alt=""></p>
-<a id="more"></a>
-<h1 id="Cookie-Session-Token"><a href="#Cookie-Session-Token" class="headerlink" title="Cookie Session Token"></a>Cookie Session Token</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>众所周知，目前客户端与服务端之间的交互基本都是基于Http和Https，它们本身是无状态的，只负责对应的请求和相应，那么当一个请求从客户端发送到服务端的时候，服务端无法知道是谁发出的请求，也就不知道把什么资源返回到客户端，这时我们就需要用到以上信息来记录用户的状态。</p>
-<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie实际上是一小段的文本信息，当客户端首次发起请求时，服务端会生成一个Cookie并返回给客户端，Cookie存储在客户端，在下次请求发起时，请求内容连同Cookie一起提交给服务端，服务端通过该Cookie来判别该用户信息。</p>
-<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><p>Session同样是客户端在首次请求时创建的，不过此时服务端并不是把所有信息全都返回给客户端，而是将用户信息存储在服务端并将对应的SessionId返回给客户端，通常客户端会将这个SessionId存放在Cookie中，之后客户端的每次请求只需要带上相应的SessionId即可。<br>使用Session的最大问题在于单点登录，用户的Session只会存在于一台服务器上，如果要实现单点登录，这就要求在各个服务器上同步Session，开销过大</p>
-<h3 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h3><p>相比于传统的身份验证方式，Token在扩展性和安全性方面的优势，使其十分适用于Web应用和移动应用上。</p>
-<p>1、客户端将用户自己的用户名密码传到服务端，这一过程一般是HTTP POST请求，建议的方式是通过SSL传输加密(https)，避免敏感信息被嗅探。<br>2、服务端核对用户名密码，success后将用户userId作为一个属性与其头部分别进行Base64编码后形成签名，形成一个JWT(JSON Web Token)，将JWT作为Cookie一部分返回客户端，之后客户端请求带上JWT，服务端进行Base64解码就可以获取到用户的userId</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢老板，么么哒<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/blogPay.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -214,88 +176,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/19/Session-Cookie-Token/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
   
   
-    <a href="/2017/05/26/浅谈git/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">GIT</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-    <div class="duoshuo"></div>
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -318,8 +211,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
