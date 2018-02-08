@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="lionsyu's blog">
 <meta property="og:description" content="博客搭建好已有小半年，由于自己实在唠叨不起来，所以迟迟不敢动笔。前几篇博客先把自己在bear上的笔记优化重构一下吧。">
 <meta property="og:image" content="http://lionsyu.github.io/image/git.jpg">
-<meta property="og:updated_time" content="2017-09-19T09:53:43.000Z">
+<meta property="og:updated_time" content="2018-02-08T09:43:33.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GIT">
 <meta name="twitter:description" content="博客搭建好已有小半年，由于自己实在唠叨不起来，所以迟迟不敢动笔。前几篇博客先把自己在bear上的笔记优化重构一下吧。">
@@ -168,12 +168,13 @@
 <h5 id="git-rm"><a href="#git-rm" class="headerlink" title="git rm"></a>git rm</h5><p>git rm test.java 从git仓库删除test.java文件，同时删除本地文件<br>git rm -cache test.java 从git仓库删除test.java文件，不删除本地文件  </p>
 <h5 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h5><p>git pull [remote-name] [branch-name] 获取远程服务器数据，并同时与本地数据合并（可能会出现冲突）  </p>
 <h5 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h5><p>git push [remote-name] [branch-name]上传数据到远程分支，若出现冲突，则上传失败<br>git push -force [remote-name] [branch-name]强制上传数据到远程分支（覆盖远程数据，慎用！！！）  </p>
-<h5 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h5><p>git branch 查看本地分支列表<br>git branch -r 查看原创分支列表<br>git branch -a 查看所有分支<br>git branch -d [branch-name] 删除指定分支<br>git branch -D [branch-name] 强制删除指定分支<br>git push origin:[remote-branch] 删除指定远程分支  </p>
+<h5 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h5><p>git branch 查看本地分支列表<br>git branch -r 查看远程分支列表<br>git branch -a 查看所有分支<br>git branch -d [branch-name] 删除指定分支<br>git branch -D [branch-name] 强制删除指定分支<br>git push origin:[remote-branch] 删除指定远程分支  </p>
 <h5 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a>git checkout</h5><p>git checkout [branch-name] 切换到指定分支（切换前需要先commit或stash）<br>git checkout -b [new-branch-name] 基于当前分支创建一个新分支<br>git checkout -b [branch-name] origin/[branch-name] 获取远程分支到本地<br>git checkout [file-name] 获取远程最新文件<br>git checkout –. 放弃本地所有modify文件改动  </p>
 <h5 id="add-romote-branch"><a href="#add-romote-branch" class="headerlink" title="add romote branch"></a>add romote branch</h5><p>1.git checkout [branch-name] 切换到要上传的分支<br>2.git remote add origin [branch-name] 添加远程分支。<br>3.git push origin [branch-name] 推送数据到远程分支(自动创建分支，step2可省去)</p>
+<h5 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h5><p>git stash 将工作区内容暂存<br>git stash apply恢复工作区内容 但是不删除stash信息，通过git stash drop来删除<br>git stash pop 恢复工作区，并且删除stash信息</p>
 <h3 id="git合并分支（推荐cherry-pick）"><a href="#git合并分支（推荐cherry-pick）" class="headerlink" title="git合并分支（推荐cherry-pick）"></a>git合并分支（推荐cherry-pick）</h3><h5 id="git-merge"><a href="#git-merge" class="headerlink" title="git merge"></a>git merge</h5><p>1.git merge [branch-name] 合并指定分支到当前分支<br>2.git add -A  手动解决冲突后，暂时缓存<br>3.git commit -m “feat:新增XXX功能” 再次提交</p>
 <h5 id="git-cherry-pick"><a href="#git-cherry-pick" class="headerlink" title="git cherry-pick"></a>git cherry-pick</h5><p>git cherry-pick commit  -[id] 合并指定commit到当前分支<br>git add -A  手动解决冲突后暂时缓存<br>git cherry-pick – continue 继续刚才的pick操作<br>git cherry-pick – abort 放弃cherry-pick操作</p>
-<h3 id="git撤销与修改"><a href="#git撤销与修改" class="headerlink" title="git撤销与修改"></a>git撤销与修改</h3><h5 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h5><p>git reset –mixed commit-id  默认方式，回退到指定个版本，只保留源码，回退commit和index信息<br>git reset –soft commit-id   回退到某个版本，只回退了commit的信息，不会恢复到index file级。如果还要提交，直接commit即可<br>git reset –hard commit-id   #彻底回退到某个版本，本地的源码也会变为上一个版本的内容</p>
+<h3 id="git撤销与修改"><a href="#git撤销与修改" class="headerlink" title="git撤销与修改"></a>git撤销与修改</h3><h5 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h5><p>git reset –mixed [commit-id]  默认方式，回退到指定个版本，只保留源码，回退commit和index信息<br>git reset –soft [commit-id]   回退到某个版本，只回退了commit的信息，不会恢复到index file级。如果还要提交，直接commit即可<br>git reset –hard [commit-id]   #彻底回退到某个版本，本地的源码也会变为上一个版本的内容<br>git reset –hard HEAD^ 回退到上一个版本</p>
 <h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>
       
 
@@ -213,15 +214,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
         		</li>
       		
 		</ul>
@@ -398,15 +399,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
             
             <div class="clearfix"></div>
