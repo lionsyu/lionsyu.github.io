@@ -6,14 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/1 | lionsyu&#39;s blog</title>
+  <title>优雅的实现获取token，并转换成服务端userId | lionsyu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="lionsyu's blog">
-<meta property="og:url" content="http://yoursite.com/archives/2017/01/index.html">
+  <meta name="description" content="在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法
+1、首先自定义注解(在需要token转userId的方法上加上该注解即可)
+1234@Target(ElementType.METHOD)@Retention(R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="优雅的实现获取token，并转换成服务端userId">
+<meta property="og:url" content="http://yoursite.com/2018/05/03/优雅的实现获取token，并转换成服务端userId/index.html">
 <meta property="og:site_name" content="lionsyu's blog">
+<meta property="og:description" content="在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法
+1、首先自定义注解(在需要token转userId的方法上加上该注解即可)
+1234@Target(ElementType.METHOD)@Retention(R">
+<meta property="og:updated_time" content="2018-05-03T09:36:20.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lionsyu's blog">
+<meta name="twitter:title" content="优雅的实现获取token，并转换成服务端userId">
+<meta name="twitter:description" content="在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法
+1、首先自定义注解(在需要token转userId的方法上加上该注解即可)
+1234@Target(ElementType.METHOD)@Retention(R">
   
     <link rel="alternative" href="/atom.xml" title="lionsyu&#39;s blog" type="application/atom+xml">
   
@@ -135,49 +145,161 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-优雅的实现获取token，并转换成服务端userId" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/13/hello/" class="archive-article-date">
-  	<time datetime="2017-01-13T07:11:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/13/hello/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      优雅的实现获取token，并转换成服务端userId
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2018/05/03/优雅的实现获取token，并转换成服务端userId/" class="archive-article-date">
+  	<time datetime="2018-05-03T08:39:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法</p>
+<p>1、首先自定义注解(在需要token转userId的方法上加上该注解即可)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.METHOD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AccessToken &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2、定义AccessToken方法里的内容，其中用户token我是存在redis中，用stringRedisTemplate来获取token对应的userId，对于没有获取到token的请求，返回401，让客户端直接跳转到登录页面</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccessTokenInterceptor</span> <span class="keyword">extends</span> <span class="title">HandlerInterceptorAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    StringRedisTemplate stringRedisTemplate;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!(handler <span class="keyword">instanceof</span> HandlerMethod)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        HandlerMethod handlerMethod = (HandlerMethod) handler;</div><div class="line">        Method method = handlerMethod.getMethod();</div><div class="line">        <span class="comment">//未使用accessToken</span></div><div class="line">        <span class="keyword">if</span> (method.getAnnotation(AccessToken.class) == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//从header中获取token</span></div><div class="line">        String token = request.getHeader(TOKEN);</div><div class="line">        <span class="keyword">if</span> (!StringUtils.isEmpty(token)) &#123;</div><div class="line">            String userId = stringRedisTemplate.opsForValue().get(token);</div><div class="line">            <span class="keyword">if</span> (!StringUtils.isEmpty(userId)) &#123;</div><div class="line">                request.setAttribute(CURRENT_USER_ID, Long.valueOf(userId));</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3、最后在需要的方法中加上accessToken注解即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ApiOperation</span>(value = <span class="string">"测试"</span>)</div><div class="line">  <span class="meta">@ApiImplicitParam</span>(name = TOKEN, value = <span class="string">"用户token"</span>, required = <span class="keyword">true</span>, paramType = <span class="string">"header"</span>)</div><div class="line">  <span class="meta">@AccessToken</span></div><div class="line">  <span class="meta">@GetMapping</span>(<span class="string">"/test"</span>)</div><div class="line">  <span class="function"><span class="keyword">public</span> ResponseResult <span class="title">collection</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</div><div class="line">      Long userId = (Long) request.getAttribute(CURRENT_USER_ID);</div><div class="line">      System.out.println(userId);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>如此服务端便知道这个请求是哪个用户发起的了，在最后的controller中使用了swagger2生成接口文档，使用swagger2的好处是不用在单独维护接口文档，并且通过swagger-ui提供的页面可以让客户端与服务端直接模拟请求。关于swagger部分的内容会在之后的博客中写到。</p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢老板，么么哒<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/blogPay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/05/03/优雅的实现获取token，并转换成服务端userId/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/02/01/RESTful/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RESTful API 基础知识</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -200,8 +322,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
