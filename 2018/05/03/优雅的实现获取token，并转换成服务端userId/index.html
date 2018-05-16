@@ -8,22 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>优雅的实现获取token，并转换成服务端userId | lionsyu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法
-1、首先自定义注解(在需要token转userId的方法上加上该注解即可)
-1234@Target(ElementType.METHOD)@Retention(R">
+  <meta name="description" content="在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="优雅的实现获取token，并转换成服务端userId">
 <meta property="og:url" content="http://yoursite.com/2018/05/03/优雅的实现获取token，并转换成服务端userId/index.html">
 <meta property="og:site_name" content="lionsyu's blog">
-<meta property="og:description" content="在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法
-1、首先自定义注解(在需要token转userId的方法上加上该注解即可)
-1234@Target(ElementType.METHOD)@Retention(R">
-<meta property="og:updated_time" content="2018-05-03T09:36:20.674Z">
+<meta property="og:description" content="在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法">
+<meta property="og:updated_time" content="2018-05-16T03:50:04.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="优雅的实现获取token，并转换成服务端userId">
-<meta name="twitter:description" content="在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法
-1、首先自定义注解(在需要token转userId的方法上加上该注解即可)
-1234@Target(ElementType.METHOD)@Retention(R">
+<meta name="twitter:description" content="在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法">
   
     <link rel="alternative" href="/atom.xml" title="lionsyu&#39;s blog" type="application/atom+xml">
   
@@ -166,6 +160,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>在跟客户端（尤其是APP）交互的过程中，由于http的无状态性，就需要定义token来鉴别用户身份。而对于服务端来讲，用户信息基本采用userId的形式进行对应，以此简单的写一个利用spring拦截器将token转换为userId的方法</p>
+<a id="more"></a>
 <p>1、首先自定义注解(在需要token转userId的方法上加上该注解即可)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.METHOD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AccessToken &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>2、定义AccessToken方法里的内容，其中用户token我是存在redis中，用stringRedisTemplate来获取token对应的userId，对于没有获取到token的请求，返回401，让客户端直接跳转到登录页面</p>
